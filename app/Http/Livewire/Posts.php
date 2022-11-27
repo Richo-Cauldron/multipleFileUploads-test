@@ -21,19 +21,10 @@ class Posts extends Component
         ];
         
     public function save()
-    {
-        // dd($this->featuredImage);
-        $data = [
-            'title' => $this->title,
-            'content' => $this->content,
-            'user_id' => auth()->user()->id,
-            'featuredImage' => $this->featuredImage->hashName(),
-        ];
-        
+    {        
         $this->validate();
-
-       
-        $filename = $this->featuredImage->store('images');
+        
+        $filename = $this->featuredImage->store('/', 'images');
       
         Post::create([
             'title' => $this->title,

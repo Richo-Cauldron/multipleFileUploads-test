@@ -35,7 +35,7 @@
                         </td>
                         <td class="py-2 px-2">{{ $post->title }}</td>
                         <td>{{ $post->content }}</td>
-                        <td class="text-right"><button wire:click="delete({{ $post->id }})" class="text-white bg-red-700 hover:bg-red-800 focus:ring-2 focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-1.5 mr-2 mb-dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none  dark:focus:ring-red-800 mr-5
+                        <td class="text-right"><button wire:click="delete({{ $post->id }})" class="text-white bg-red-700 hover:bg-red-800 focus:ring-2 focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-1.5 mr-2 mb-dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none  dark:focus:ring-red-800
                             ">Delete</button></td>
                     </tr>
                 @endforeach
