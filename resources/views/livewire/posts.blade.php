@@ -13,6 +13,43 @@
     <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none  dark:focus:ring-blue-800" wire:click="save">Save</button>
 
     @if ($posts->count())
+    <div class="table-fixed w-full">
+        <div class="table-header-group">
+            <div class="table-row w-full">
+                <div class="table-cell text-sm font-medium text-gray-900 px-2 py-2 text-left">Image</div>
+                <div class="table-cell text-sm font-medium text-gray-900 px-2 py-2 text-left w-1/4">Title</div>
+                <div class="table-cell text-sm font-medium text-gray-900  py-2 text-left w-1/2">Content</div>
+                <div class="table-cell text-sm font-medium text-gray-900  text-left">Actions</div>                
+            </div>
+        </div> 
+        <div class="table-row-group">
+            @foreach ($posts as $post)
+                <div class="table-row border-b border-gray-300 odd:bg-gray-200">
+                    <div class="table-cell align-middle">
+                        @if (!empty($post->featured_image))
+                            <img width="80px" src="{{ url('images/' . $post->featured_image) }}" alt="" />
+                        @else
+                            No image available
+                        @endif
+                    </div>
+                    <div class="table-cell align-middle py-2 px-2">
+                        {{ $post->title }}
+                    </div>
+                    <div class="table-cell align-middle overflow-hidden">
+                        {{ $post->content }}
+                    </div>
+                    <div class=" table-cell align-middle">
+                        <button wire:click="update({{ $post->id }})" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 mr-2 mb-dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none  dark:focus:ring-blue-800">Update</button>
+                    </div>
+                    <div class="table-cell align-middle">
+                        <button wire:click="delete({{ $post->id }})" class="text-white bg-red-700 hover:bg-red-800 focus:ring-2 focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-1.5 mr-2 mb-dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none  dark:focus:ring-red-800">Delete</button>
+                    </div>
+                </div>
+            @endforeach
+            
+        </div>
+
+    </div>
     <div class="flex flex-col">
         <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
@@ -35,8 +72,10 @@
                         </td>
                         <td class="py-2 px-2">{{ $post->title }}</td>
                         <td>{{ $post->content }}</td>
-                        <td class="text-right"><button wire:click="delete({{ $post->id }})" class="text-white bg-red-700 hover:bg-red-800 focus:ring-2 focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-1.5 mr-2 mb-dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none  dark:focus:ring-red-800
-                            ">Delete</button></td>
+                        <td class="text-right">
+                            <button wire:click="update({{ $post->id }})" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 mr-2 mb-dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none  dark:focus:ring-blue-800">Update</button>
+                            <button wire:click="delete({{ $post->id }})" class="text-white bg-red-700 hover:bg-red-800 focus:ring-2 focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-1.5 mr-2 mb-dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none  dark:focus:ring-red-800">Delete</button>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
